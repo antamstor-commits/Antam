@@ -33,7 +33,7 @@ header {
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .logo img {
@@ -44,6 +44,7 @@ header {
 .cart {
     position: relative;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .cart-count {
@@ -67,7 +68,7 @@ header {
 /* BANNER */
 .banner {
     height: 120px;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/8/8e/Gold_bar_antam.jpg') center/cover;
+    background: url('img/banner.jpg') center/cover;
     margin: 8px;
     border-radius: 10px;
 }
@@ -91,9 +92,9 @@ header {
 
 .product-card img {
     width: 100%;
-    border-radius: 8px;
     height: 120px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 .product-name {
@@ -120,6 +121,7 @@ header {
     background: #ee4d2d;
     color: white;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 /* CART */
@@ -144,7 +146,7 @@ header {
 <header>
     <div class="top-bar">
         <div class="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Gold_icon.png">
+            <img src="img/logo.png">
             Toko Emas Antam
         </div>
 
@@ -174,41 +176,41 @@ header {
 
 <script>
 const produk = [
-{nama:"Emas 0.5 Gram",harga:650000,img:"https://upload.wikimedia.org/wikipedia/commons/8/8e/Gold_bar_antam.jpg"},
-{nama:"Emas 1 Gram",harga:1200000,img:"https://upload.wikimedia.org/wikipedia/commons/8/8e/Gold_bar_antam.jpg"},
-{nama:"Emas 2 Gram",harga:2350000,img:"https://upload.wikimedia.org/wikipedia/commons/8/8e/Gold_bar_antam.jpg"},
-{nama:"Emas 3 Gram",harga:3450000,img:"https://upload.wikimedia.org/wikipedia/commons/8/8e/Gold_bar_antam.jpg"},
-{nama:"Emas 5 Gram",harga:5800000,img:"https://upload.wikimedia.org/wikipedia/commons/3/3a/Antam_gold_5g.jpg"},
-{nama:"Emas 10 Gram",harga:11500000,img:"https://upload.wikimedia.org/wikipedia/commons/1/1d/Antam_gold_10g.jpg"},
-{nama:"Emas 25 Gram",harga:28500000,img:"https://upload.wikimedia.org/wikipedia/commons/0/0b/Antam_gold_25g.jpg"},
-{nama:"Emas 50 Gram",harga:56800000,img:"https://upload.wikimedia.org/wikipedia/commons/5/5c/Antam_gold_50g.jpg"},
-{nama:"Emas 100 Gram",harga:113000000,img:"https://upload.wikimedia.org/wikipedia/commons/f/f3/Antam_gold_100g.jpg"}
+ {nama:"Emas 0.5 Gram",harga:650000,img:"img/emas-05g.jpg"},
+ {nama:"Emas 1 Gram",harga:1200000,img:"img/emas-1g.jpg"},
+ {nama:"Emas 2 Gram",harga:2350000,img:"img/emas-2g.jpg"},
+ {nama:"Emas 3 Gram",harga:3450000,img:"img/emas-3g.jpg"},
+ {nama:"Emas 5 Gram",harga:5800000,img:"img/emas-5g.jpg"},
+ {nama:"Emas 10 Gram",harga:11500000,img:"img/emas-10g.jpg"},
+ {nama:"Emas 25 Gram",harga:28500000,img:"img/emas-25g.jpg"},
+ {nama:"Emas 50 Gram",harga:56800000,img:"img/emas-50g.jpg"},
+ {nama:"Emas 100 Gram",harga:113000000,img:"img/emas-100g.jpg"}
 ];
 
 let cart = [];
 
-function tampilkanProduk(list) {
+function tampilkanProduk(list){
     const container = document.getElementById("product-list");
     container.innerHTML = "";
 
-    list.forEach(p => {
+    list.forEach(p=>{
         container.innerHTML += `
         <div class="product-card">
             <img src="${p.img}">
             <div class="product-name">${p.nama}</div>
             <div class="rating">⭐ 4.9 | Terjual 100+</div>
             <div class="price">Rp ${p.harga.toLocaleString()}</div>
-            <button class="buy-btn" onclick="beli('${p.nama}', ${p.harga})">Beli</button>
+            <button class="buy-btn" onclick="beli('${p.nama}',${p.harga})">Beli</button>
         </div>`;
     });
 }
 
-function beli(nama, harga) {
-    cart.push({nama, harga});
+function beli(nama,harga){
+    cart.push({nama,harga});
     updateCart();
 }
 
-function updateCart() {
+function updateCart(){
     const list = document.getElementById("cart-items");
     const totalEl = document.getElementById("total");
     const countEl = document.getElementById("cart-count");
@@ -216,7 +218,7 @@ function updateCart() {
     list.innerHTML = "";
     let total = 0;
 
-    cart.forEach((item, index) => {
+    cart.forEach(item=>{
         total += item.harga;
         list.innerHTML += `<li>${item.nama}</li>`;
     });
@@ -225,14 +227,14 @@ function updateCart() {
     countEl.innerText = cart.length;
 }
 
-function toggleCart() {
+function toggleCart(){
     const box = document.getElementById("cart-box");
     box.style.display = box.style.display === "block" ? "none" : "block";
 }
 
-function searchProduk() {
+function searchProduk(){
     const keyword = document.getElementById("search").value.toLowerCase();
-    const hasil = produk.filter(p => p.nama.toLowerCase().includes(keyword));
+    const hasil = produk.filter(p=>p.nama.toLowerCase().includes(keyword));
     tampilkanProduk(hasil);
 }
 
